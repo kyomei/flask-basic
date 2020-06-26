@@ -28,6 +28,14 @@ def blog(postID=None):
     else:
         return "Blog todo"
 
+@app.route("/blog2/")
+@app.route("/blog2/<float:postID>")
+def blog2(postID=None):
+    if postID:
+        return "blog info {}".format(postID)
+    else:
+        return "Blog todo"
+
 
 app.add_url_rule("/teste", "teste", teste)
 app.add_url_rule("/teste-2", "teste2", teste2)
