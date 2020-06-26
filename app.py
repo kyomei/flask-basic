@@ -15,10 +15,18 @@ def teste():
 def teste2():
     return "<h1>Testando 2</h1>"
 
-@app.route("/hello")
+@app.route("/hello/")
 @app.route("/hello/<nome>")
 def hello(nome="World"):
     return "<h1>Hello {}</h1>".format(nome)
+
+@app.route("/blog/")
+@app.route("/blog/<int:postID>")
+def blog(postID=None):
+    if postID:
+        return "blog info {}".format(postID)
+    else:
+        return "Blog todo"
 
 
 app.add_url_rule("/teste", "teste", teste)
