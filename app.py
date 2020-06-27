@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # Aula 01 - Instalando o Flask
 
-from flask import Flask, request, abort, redirect, url_for
+from flask import Flask, request, abort, redirect, url_for, render_template
 from json import dumps
 
-app = Flask(__name__, static_folder='public')
+app = Flask(__name__, static_folder='public', template_folder='templates')
 
 
 @app.route("/")
@@ -38,8 +38,12 @@ def painel():
 def teste():
     return "<p>Testando 1</p>"
 
-def teste2():
-    return "<h1>Testando 2</h1>"
+def pessoas():
+    nomes = ['Rafael', 'Angela', 'Gustavo', 'Julia']
+    sobrenomes = ['Jeferson', 'Angelica', 'Henrique', 'Isabelly']
+    nomesCompletos = [n+' '+s for n,s in list(map(lambda n,s: (n,s), nomes, sobrenomes))]
+    print nomesCompletos
+    return render_template('modelo.html', nomes=nomes, sobrenomes=sobrenomes, nomesCompletos=nomesCompletos)
 
 @app.route("/hello/")
 @app.route("/hello/<nome>")
@@ -66,7 +70,7 @@ def blog2(postID=None):
 
 
 app.add_url_rule("/teste", "teste", teste)
-app.add_url_rule("/teste-2", "teste2", teste2)
+app.add_url_rule("/pessoas", "pessoas", pessoas)
 
 if __name__ == '__main__':
     app.run(debug=True, port="3000")
