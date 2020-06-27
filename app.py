@@ -2,7 +2,7 @@
 
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public')
 
 
 @app.route("/")
@@ -35,6 +35,8 @@ def blog2(postID=None):
         return "blog info {}".format(postID)
     else:
         return "Blog todo"
+
+
 
 
 app.add_url_rule("/teste", "teste", teste)
