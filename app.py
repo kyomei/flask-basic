@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Aula 01 - Instalando o Flask
 
-from flask import Flask, request
+from flask import Flask, request, abort, redirect, url_for
 from json import dumps
 
 app = Flask(__name__, static_folder='public')
@@ -24,8 +24,16 @@ def page():
 @app.route("/login", methods=["GET",'POST'])
 def login():
     if request.method == "POST":
-        return dumps(request.form)
+        print request.form
+        if (request.form['email'] == 'admin@email.com' and request.form['password'] == '1234'):
+            return redirect(url_for('painel'), code=302)
+        else:
+            abort(401)
     return dumps({"status": False, "message": "Algo de errado não está certo"})
+
+@app.route('/painel')
+def painel():
+    return '<h1>Bem vindo ao painel administrativo</h1>'
 
 def teste():
     return "<p>Testando 1</p>"
