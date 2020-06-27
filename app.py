@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 # Aula 01 - Instalando o Flask
 
-from flask import Flask
+from flask import Flask, request
+from json import dumps
 
 app = Flask(__name__, static_folder='public')
 
@@ -8,6 +10,12 @@ app = Flask(__name__, static_folder='public')
 @app.route("/")
 def index():
     return "Hello world"
+
+@app.route("/login", methods=["GET",'POST'])
+def login():
+    if request.method == "POST":
+        return dumps(request.form)
+    return dumps({"status": False, "message": "Algo de errado não está certo"})
 
 def teste():
     return "<p>Testando 1</p>"
