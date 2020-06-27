@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<title>Flask</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container w3-teal">
+    <h1>Curso de Flask</h1>
+</div>
+
+<div class="w3-container">
+
+    {% if logged != None %}
+    <h2>Bem vindo {{ logged }}</h2>
+    <p>Para deslogar do sistema <a href="/logout" title="Sair do sistema">Clique aqui</a></p>
+    {% else %}
+    <h2>Você não está logado!</h2>
+    <p>Ir para tela de login <a href="/public/login.html" title="Página de login">Clique aqui</a></p>
+    {% endif %}
+    <p>Playlist do curso flask: <a href="https://www.youtube.com/playlist?list=PLWhiA_CuQkbBhvPojHOPY81BmDt2eSfgI" target="_blank">https://www.youtube.com/playlist?list=PLWhiA_CuQkbBhvPojHOPY81BmDt2eSfgI</a></a></p>
+</div>
+
+</body>
+</html> 
