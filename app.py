@@ -11,6 +11,16 @@ app = Flask(__name__, static_folder='public')
 def index():
     return "Hello world"
 
+@app.route("/page", methods=["GET"])
+def page():
+    """
+        Converte para dicionario
+        opc1 = request.args.to_dict()
+        opc2 = dict(request.args)
+        print opc1['nome'] // rafael
+    """
+    return dumps(request.args)
+
 @app.route("/login", methods=["GET",'POST'])
 def login():
     if request.method == "POST":
