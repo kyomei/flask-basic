@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Aula 01 - Instalando o Flask
 
-from flask import Flask, request, abort, redirect, url_for, render_template, send_file
+from flask import Flask, request, abort, redirect, url_for, render_template, send_file, make_response
 from json import dumps
 import os
 from werkzeug.utils import secure_filename
@@ -27,6 +27,24 @@ def upload():
 def download(filename):
     file = os.path.join(UPLOAD_FOLDER, filename)
     return send_file(file, mimetype="imagem/png")
+
+@app.route("/cookie")
+def cookie():
+    return render_template("viewCookie.html")
+
+@app.route("/setcookie", methods=['GET', 'POST'])
+def setcookie():
+    resp = make_response(render_template('setcookie.html'))
+    if request.method == 'POST':
+        dados = request.form['c']
+        resp.set_cookie('testecookie', dados)
+
+    return resp
+
+@app.route("/getcookie")
+def getcookie():
+    cookieName = request.cookies.get('testecookie')
+    return '<h1>Valor do cookie é: {}</h1>'.format(cookieName)
 
 @app.route("/page", methods=["GET"])
 def page():
